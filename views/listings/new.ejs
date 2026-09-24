@@ -1,0 +1,354 @@
+<% layout("/layouts/boilerplate")%>
+
+<div class="row">
+<div class="col-8 offset-2">
+
+<h3> Create New Listing</h3>
+
+<form method="POST"
+      action="/listings"
+      novalidate
+      class="needs-validation"
+      enctype="multipart/form-data">
+
+    <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+
+        <input
+            name="listing[title]"
+            placeholder="\Add a catchy title"
+            type="text"
+            class="form-control"
+            required
+        >
+
+        <div class="valid-feedback">Title looks good!</div>
+    </div>
+
+
+    <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+
+        <textarea
+            name="listing[description]"
+            type="text"
+            class="form-control"
+            required>
+        </textarea>
+
+        <div class="invalid-feedback">
+            Please enter short description
+        </div>
+    </div>
+
+
+    <div class="mb-3">
+        <label for="image" class="form-label">
+            Upload Image
+        </label>
+
+        <input
+            name="listing[image]"
+            type="file"
+            class="form-control required">
+    </div>
+
+
+    <div class="row">
+
+        <div class="mb-3 col-md-4">
+
+            <label for="price" class="form-label">
+                Prize
+            </label>
+
+            <input
+                name="listing[price]"
+                placeholder="enter price"
+                type="number"
+                class="form-control"
+                required
+            >
+
+            <div class="invalid-feedback">
+                Price should be valid
+            </div>
+
+        </div>
+
+
+        <div class="mb-3 col-md-8">
+
+            <label for="country" class="form-label">
+                Country
+            </label>
+
+            <input
+                name="listing[country]"
+                placeholder="enter country"
+                type="text"
+                class="form-control"
+                required
+            >
+
+            <div class="invalid-feedback">
+                Country should be valid
+            </div>
+
+        </div>
+
+
+        <div class="mb-3">
+
+            <label for="location" class="form-label">
+                Location
+            </label>
+
+            <input
+                name="listing[location]"
+                placeholder="enter location"
+                type="text"
+                class="form-control"
+                required
+            >
+
+            <div class="invalid-feedback">
+                Location should be valid
+            </div>
+
+        </div>
+
+
+        <div class="mb-3">
+
+            <label for="category" class="form-label">
+                Category
+            </label>
+
+            <select
+                name="listing[category]"
+                id="category"
+                class="form-select"
+                required
+            >
+
+                <option value="" selected disabled>
+                    Select a category
+                </option>
+
+                <option value="Trending">Trending</option>
+                <option value="Rooms">Rooms</option>
+                <option value="Iconic Cities">Iconic Cities</option>
+                <option value="Mountain">Mountain</option>
+                <option value="Castles">Castles</option>
+                <option value="Amazing Polls">Amazing Polls</option>
+                <option value="Camping">Camping</option>
+                <option value="Farms">Farms</option>
+                <option value="Arctic">Arctic</option>
+                <option value="Beach">Beach</option>
+                <option value="Domes">Domes</option>
+                <option value="Boats">Boats</option>
+
+            </select>
+
+        </div>
+
+
+        <!-- ================================================= -->
+        <!-- NEW FUNCTIONALITY: PACKAGES -->
+        <!-- ================================================= -->
+
+        <div class="mb-3">
+
+            <h4 class="mt-4 mb-3">
+                Available Packages
+            </h4>
+
+            <p class="text-muted">
+                Select the packages available for this villa.
+            </p>
+
+            <div id="packages-container">
+
+                <!-- PACKAGE 1 -->
+                <div class="package-box border rounded p-3 mb-3">
+
+                    <h5>
+                        Package 1
+                    </h5>
+
+                    <!-- Package Name -->
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Package Name
+                        </label>
+
+                        <select
+                            name="listing[packages][0][name]"
+                            class="form-select"
+                            
+                        >
+
+                            <option value="" selected disabled>
+                                Select Package
+                            </option>
+
+                            <option value="Standard">
+                                Standard
+                            </option>
+
+                            <option value="Deluxe">
+                                Deluxe
+                            </option>
+
+                            <option value="Premium">
+                                Premium
+                            </option>
+
+                            <option value="Family">
+                                Family
+                            </option>
+
+                            <option value="Couple">
+                                Couple
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- Package Image -->
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Package Image
+                        </label>
+
+                        <input
+                            type="file"
+                            name="listing[packages][0][image]"
+                            class="form-control"
+                            accept="image/*"
+                            
+                        >
+
+                    </div>
+
+
+                    <!-- Package Price -->
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Package Price
+                        </label>
+
+                        <input
+                            type="number"
+                            name="listing[packages][0][price]"
+                            placeholder="Enter package price"
+                            class="form-control"
+                            min="0"
+                            
+                        >
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ADD PACKAGE BUTTON -->
+            <button
+                type="button"
+                class="btn btn-outline-dark"
+                id="add-package"
+            >
+                + Add Package
+            </button>
+
+        </div>
+
+        <!-- ================================================= -->
+        <!-- END OF NEW FUNCTIONALITY -->
+        <!-- ================================================= -->
+
+
+        <br /><br/>
+
+        <button class="btn btn-dark add-btn">
+            Add
+        </button>
+
+        <br/> <br/>
+
+    </form>
+
+</body>
+
+</div>
+</div>
+
+
+<!-- ================================================= -->
+<!-- JAVASCRIPT FOR ADDING / REMOVING PACKAGES -->
+<!-- ================================================= -->
+
+<script>
+    let packageIndex = 1;
+    const addPackageButton = document.getElementById("add-package");
+    const packagesContainer =document.getElementById("packages-container");
+
+
+    addPackageButton.addEventListener("click", function () {
+
+        const packageBox = document.createElement("div");
+        packageBox.classList.add("package-box","border","rounded","p-3","mb-3");
+
+        packageBox.innerHTML = `
+
+            <h5>Package ${packageIndex + 1}</h5>
+            <div class="mb-3">
+                <label class="form-label">Package Name</label>
+
+                <select name="listing[packages][${packageIndex}][name]"class="form-select"required>
+
+                    <option value="" selected disabled>Select Package</option>
+                    <option value="Standard">Standard</option>
+                    <option value="Deluxe">Deluxe</option>
+                    <option value="Premium">Premium</option>
+                    <option value="Family">Family</option>
+                    <option value="Couple">Couple</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Package Image</label>
+                <input type="file"name="listing[packages][${packageIndex}][image]"class="form-control"accept="image/*"required>
+            </div>
+
+
+            <div class="mb-3">
+                <label class="form-label">Package Price</label>
+
+                <input type="number"name="listing[packages][${packageIndex}][price]"placeholder="Enter package price"class="form-control"min="0"required>
+            </div>
+
+            <button type="button"class="btn btn-danger remove-package">
+                Remove Package
+            </button>
+        `;
+        packagesContainer.appendChild(packageBox);
+        packageIndex++;
+    });
+
+    // REMOVE PACKAGE
+    packagesContainer.addEventListener("click", function (event) {
+        if (event.target.classList.contains("remove-package")) {
+            event.target.closest(".package-box").remove();
+        }
+    });
+
+</script>

@@ -1,0 +1,175 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="row mt-5 mb-5">
+
+    <div class="col-md-8 offset-md-2">
+
+        <div class="card shadow-lg border-0 rounded-4">
+
+            <!-- ==================== SUCCESS HEADER ==================== -->
+
+            <div class="card-body text-center p-5">
+
+                <div class="mb-3">
+                    <span style="font-size: 60px;">🎉</span>
+                </div>
+
+                <h1 class="text-success fw-bold">
+                    Booking Confirmed!
+                </h1>
+
+                <p class="text-muted fs-5">
+                    Your stay has been successfully booked.
+                </p>
+
+                <hr class="my-4">
+
+
+                <!-- ==================== LISTING NAME ==================== -->
+
+                <h3 class="fw-bold mb-4">
+                    <%= listing.title %>
+                </h3>
+
+
+                <!-- ==================== PACKAGE ==================== -->
+
+                <div class="p-3 mb-4 bg-light rounded-3">
+
+                    <p class="text-muted mb-1">
+                        Selected Package
+                    </p>
+
+                    <h4 class="fw-bold">
+                        <%= booking.packageName %>
+                    </h4>
+
+                    <p class="mb-0">
+                        ₹<%= booking.packagePrice.toLocaleString("en-IN") %>
+                        per night
+                    </p>
+
+                </div>
+
+
+                <!-- ==================== BOOKING DETAILS ==================== -->
+
+                <div class="text-start">
+
+                    <div class="row mb-3">
+
+                        <!-- CHECK-IN -->
+
+                        <div class="col-sm-6">
+
+                            <p class="text-muted mb-1">
+                                Check-in
+                            </p>
+
+                            <h5>
+                                📅 <%= booking.checkIn.toDateString() %>
+                            </h5>
+
+                        </div>
+
+
+                        <!-- CHECK-OUT -->
+
+                        <div class="col-sm-6">
+
+                            <p class="text-muted mb-1">
+                                Check-out
+                            </p>
+
+                            <h5>
+                                📅 <%= booking.checkOut.toDateString() %>
+                            </h5>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="row mb-3">
+
+                        <!-- GUESTS -->
+
+                        <div class="col-sm-6">
+
+                            <p class="text-muted mb-1">
+                                Guests
+                            </p>
+
+                            <h5>
+                                👥 <%= booking.guests %>
+                            </h5>
+
+                        </div>
+
+
+                        <!-- PACKAGE PRICE -->
+
+                        <div class="col-sm-6">
+
+                            <p class="text-muted mb-1">
+                                Package Price
+                            </p>
+
+                            <h5>
+                                ₹<%= booking.packagePrice.toLocaleString("en-IN") %>
+                                / night
+                            </h5>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <hr class="my-4">
+
+
+                <!-- ==================== TOTAL PRICE ==================== -->
+
+                <div class="p-3 rounded-3 bg-light">
+
+                    <p class="text-muted mb-1">
+                        Total Amount
+                    </p>
+
+                    <h2 class="fw-bold text-success">
+                        ₹<%= booking.totalPrice.toLocaleString("en-IN") %>
+                    </h2>
+
+                </div>
+
+
+                <!-- ==================== BUTTONS ==================== -->
+
+                <div class="mt-4">
+
+                    <a
+                        href="/listings/<%= listing._id %>"
+                        class="btn btn-danger me-2 px-4"
+                    >
+                        Back to Listing
+                    </a>
+
+
+                    <a
+                        href="/listings"
+                        class="btn btn-outline-dark px-4"
+                    >
+                        Explore More
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div> bn
