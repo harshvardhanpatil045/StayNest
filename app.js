@@ -101,6 +101,12 @@ app.use((req, res, next) =>{
     next();
 });
 
+// HOME ROUTE
+app.get("/", (req, res) => {
+    res.redirect("/listings");
+});
+
+
 // app.get("/demouser" ,async (req, res) =>{
 //     let fakeUser = new User({
 //         email:"pt@example.com",
